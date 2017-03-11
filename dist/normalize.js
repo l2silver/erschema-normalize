@@ -19,23 +19,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-function normalize(input, entityName, schema) {
+function normalize(input, entityName, schema, startingSchema) {
   var entities = {};
   var relationships = {};
-  _normalizeRecursive(input, entityName, schema, entities, relationships);
+  _normalizeRecursive(input, entityName, schema, entities, relationships, startingSchema);
   return { entities: entities, relationships: relationships };
 }
 
-var _normalizeRecursive = function _normalizeRecursive(input, entityName, schema, entities, relationshipData) {
-  var entitySchema = schema[entityName];
+var _normalizeRecursive = function _normalizeRecursive(input, entityName, schema, entities, relationshipData, startingSchema) {
+  var entitySchema = (startingSchema || schema)[entityName];
   if (!entitySchema) {
     throw Error('schema ' + entityName + ' not defined');
   }
-  var _schema$entityName = schema[entityName],
-      modifier = _schema$entityName.modifier,
-      relationships = _schema$entityName.relationships,
-      idFunc = _schema$entityName.idFunc,
-      properties = _schema$entityName.properties;
+  var modifier = entitySchema.modifier,
+      relationships = entitySchema.relationships,
+      idFunc = entitySchema.idFunc,
+      properties = entitySchema.properties;
 
   var usedRelationships = [];
   var inputId = idFunc(input);
