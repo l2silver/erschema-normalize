@@ -4,6 +4,11 @@ import {relationshipTypes} from 'erschema'
 import pick from 'lodash.pick'
 import type {$schema} from 'erschema/types'
 
+type $$id = string | number
+type $$mapOf<X> = {[key: string]: X}
+type $$numberMapOf<X> = {[key: number]: X}
+type $$idMapOf<X> = {[key: string | number]: X}
+
 export type $normalizeResponse = {
   entities: $$mapOf<$$idMapOf<Object>>,
   relationships: $$mapOf<$$mapOf<$$idMapOf<$$id | $$id[]>>>
