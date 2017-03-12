@@ -5,8 +5,8 @@ import pick from 'lodash.pick'
 import type {$schema} from 'erschema/types'
 
 export type $normalizeResponse = {
-  entities: $$mapOf<$$numberMapOf<any>>,
-  relationships: $$mapOf<$$mapOf<$$numberMapOf<number | number[]>>>
+  entities: $$mapOf<$$idMapOf<Object>>,
+  relationships: $$mapOf<$$mapOf<$$idMapOf<$$id | $$id[]>>>
 };
 
 export default function normalize(input: Object, entityName: string, schema: $schema, startingSchema?: $schema) : $normalizeResponse {
